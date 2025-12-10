@@ -12,7 +12,9 @@ const CardBody = ({items}) => {
                 <Fragment key={item.id}>
                     <CardItem {...item} />
                     
-                    <div className="divider" />
+                    {index < items.length -1 && (
+                        <div className="divider" />
+                    )}
                 </Fragment>
                 ))}
             </div>
