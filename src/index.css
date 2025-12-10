@@ -42,7 +42,6 @@ main {
 .course {
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 .course__img {
   border-radius: 6px;

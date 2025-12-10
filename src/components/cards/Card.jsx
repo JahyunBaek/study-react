@@ -3,12 +3,14 @@ import CardBody from './CardBody';
 
 export default function Card({children}){
     const items = [{
+        id: 0,
         title: "입문자를 위한, HTML&CSS 웹 개발 입문1",
         description: "웹 개발에 필요한 기본 지식을 배웁니다.1",
         image: "/img/htmlcss.png",
         isFavorite: true
     },
     {
+        id: 1,
         title: "입문자를 위한, HTML&CSS 웹 개발 입문2",
         description: "웹 개발에 필요한 기본 지식을 배웁니다.2",
         image: "/img/js.png",
@@ -16,6 +18,7 @@ export default function Card({children}){
         link: "https://inf.run/Kpnd"
     },
     {
+        id: 2,
         title: "입문자를 위한, HTML&CSS 웹 개발 입문3",
         description: "웹 개발에 필요한 기본 지식을 배웁니다.3",
         image: "/img/portfolio.png",
