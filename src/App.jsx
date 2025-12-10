@@ -6,7 +6,9 @@ function App() {
 
   return (
     <main>
-        <Card />
+        <Card>
+          <div>자식 넘기기기</div>
+        </Card>
     </main>
   )
 }
