@@ -10,8 +10,10 @@ main {
   height: 100vh;
   background-color: #DAECFD;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 }
 
 /* Card */
@@ -42,6 +44,8 @@ main {
 .course {
   display: flex;
   align-items: center;
+  gap: 1rem;
+  cursor: pointer;
 }
 .course__img {
   border-radius: 6px;

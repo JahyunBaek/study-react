@@ -30,12 +30,18 @@ const LinkIconBtn = ({link}) => {
 
 const CardItem = ({title, description, image, isFavorite, link}) => {
 
-    const handleFavorite = () => {
+    const handleFavorite = (e) => {
+            //버블링으로 인하여 자식부터 부모까지 이벤트가 전파됨
+            //해결하기 위해서는 event.stopPropagation() 함수로 부모로의 전파를 막아야함.
              alert(isFavorite ? '좋아요' : '모르겠어요');
+             e.stopPropagation(); // 부모로의 이벤트 전달을막음
     }
-        
+    const handleItemClick = () => {
+        alert("item click");
+        open(link,'_blank');
+    }    
     return (
-        <article className="course">
+        <article className="course" onClick={handleItemClick}>
             <img className="course__img" src={image} alt="강의 이미지" />
             <div className="course__body">
                 <div className="course__title">{title}</div>
