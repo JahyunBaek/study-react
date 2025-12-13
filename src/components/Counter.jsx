@@ -1,11 +1,13 @@
 import { useState } from "react";
 
 const Counter = ({onClick, flag, setFlag}) => {
-    const [counter, setCounter] = useState(0);
-    console.log('flag',flag);
-    console.log('setFlag',setFlag);
+    const [counter, setCounter] = useState(1);
     const handleCounter = (e) => {
-        setCounter(counter + 1);
+   
+
+    setCounter(counter + 5);
+    setCounter((prevCounter) => prevCounter+1);
+    setCounter(counter + 10);
         if(onClick){
             onClick();
         }
