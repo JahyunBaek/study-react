@@ -3,7 +3,7 @@
 //     alert(isFavorite ? '좋아요' : '모르겠어요');
 // }
 
-const HeartIconBtn = ({onHeartClick, isFavorite}) =>{
+const HeartIconBtn = ({cardId, onHeartClick, isFavorite}) =>{
     const handleFavorite = () => {
         alert(isFavorite ? '좋아요' : '모르겠어요');
     }
@@ -11,7 +11,10 @@ const HeartIconBtn = ({onHeartClick, isFavorite}) =>{
     //const heartIcon = isFavorite ? "/img/heart-fill-icon.svg" : "/img/heart-icon.svg"; //return이 없을때는 null
     return (
             <div className="course__icons">
-                <button className="btn" onClick={(e) => onHeartClick(e)}>
+                <button className="btn" onClick={(e) => {
+                    onHeartClick(cardId, isFavorite);
+                    e.stopPropagation();
+                }}>
                     <img className="btn__img" src={isFavorite ? "/img/heart-fill-icon.svg" : "/img/heart-icon.svg"} alt="좋아요" />
                 </button>
             </div>
@@ -28,7 +31,7 @@ const LinkIconBtn = ({link}) => {
     )
 }
 
-const CardItem = ({title, description, image, isFavorite, link}) => {
+const CardItem = ({id, title, description, image, isFavorite, link, onChangeFavorite}) => {
 
     const handleFavorite = (e) => {
             //버블링으로 인하여 자식부터 부모까지 이벤트가 전파됨
@@ -47,7 +50,7 @@ const CardItem = ({title, description, image, isFavorite, link}) => {
                 <div className="course__title">{title}</div>
                 <div className="course__description">{description}</div>
             </div>
-            <HeartIconBtn isFavorite={isFavorite} onHeartClick={handleFavorite} />
+            <HeartIconBtn cardId={id} isFavorite={isFavorite} onHeartClick={onChangeFavorite} />
             <LinkIconBtn link={link} />
            
 		</article>

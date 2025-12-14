@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import CardItem from "./CardItem";
 
-const CardBody = ({items}) => {
+const CardBody = ({items,onChangeFavorite}) => {
     
     return (
         <div className="course__body">
@@ -10,7 +10,7 @@ const CardBody = ({items}) => {
             //.filter(item => item.isFavorite)
             .map((item, index) => (
                 <Fragment key={item.id}>
-                    <CardItem {...item} />
+                    <CardItem {...item} onChangeFavorite={onChangeFavorite} />
                     
                     {index < items.length -1 && (
                         <div className="divider" />
