@@ -1,17 +1,16 @@
-const TodoList = ({todos=[], onDeleteItem,onToggleTodo}) => {
+import { useContext } from "react";
+import TodoItem from "./TodoItem"; 
+import { TodoContext } from "../../context/TodoContext";
+const TodoList = () => {
     //const items = [...todos];
     //items.push({id :2, text:'포트폴리오 사이트 만들기'});
-
+    const todos = useContext(TodoContext);
     return (
         <ul>
             {
                 todos.map(item =>(
                     <li key={item.id}>
-                    <input type="checkbox" checked={item.done} onChange={(e) => onToggleTodo(item.id,e.target.checked)} />
-                    <span>{item.done ? (<del>{item.text}</del>) : item.text}</span>
-                    <button key={item.id} onClick={() => onDeleteItem(item.id)}>
-                       <span> [X]</span> 
-                    </button>
+                        <TodoItem item={item} />
                     </li>
                 ))
                
