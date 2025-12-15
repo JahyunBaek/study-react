@@ -7,7 +7,7 @@ import { useImmerReducer } from 'use-immer';
 const AppTodo = () =>{
 
 const [todoText,setTodoText]= useState('');
-const [todos,dispatch] = useReducer(todoReducer, [
+const [todos,dispatch] = useImmerReducer(todoReducer, [
     {id:0,text:'개발공부하기',done: false},
     {id:1,text:'JAVA공부',done: false}
 ]);

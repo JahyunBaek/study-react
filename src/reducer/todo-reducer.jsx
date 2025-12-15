@@ -1,44 +1,34 @@
-const todoReducer = (todos, action) => {
+const todoReducer = (draft, action) => {
     switch(action.type){
         case 'added':{
             const {nextId,todoText} = action;
-            return [
-                ...todos,
-                {
-                    id: nextId,
-                    text: todoText,
-                    done: false
-                }
-            ]
+            draft.push({
+                id: nextId,
+                text: todoText,
+                done: false
+            })
+            break;
         }
         case 'added-index':{
             const {nextId,todoText,insertAt} = action;
-            return [
-                //사입지점 이전 항목
-                ...todos.slice(0,insertAt),
-                {id:nextId,text:todoText,done:false},
-                ...todos.slice(insertAt)
-            ]
+            draft.splice(insertAt,0,{
+                id:nextId,
+                text:todoText,
+                done:false
+            })
+            break;
         }
         case 'deleted':{
             const {deleteId} = action;
-            return todos.filter(item => item.id !== deleteId);
+            return draft.filter(item => item.id !== deleteId);
         }
         case 'toggled':{
             const {id,done} = action;
-            return todos.map((item) => {
-                if(item.id === id){
-                 return {
-                    ...item,
-                    done
-                 }
-                }else{
-                    return item;
-                }
-            })
+            draft.find((item) => item.id === id).done = done;
+            break;
         }
         case 'reversed':{
-            return todos.toReversed();
+            return draft.toReversed();    
         }
         default:{
             throw new Error('Unhandled action',action.type);
