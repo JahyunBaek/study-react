@@ -1,26 +1,21 @@
 import './App.css'
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import TodoList from './components/todo/TodoList';
+import todoReducer from './reducer/todo-reducer';
+import { useImmerReducer } from 'use-immer';
+
 const AppTodo = () =>{
-const [todos,setTodos] = useState(
-    [
-        {id:0,text:'개발공부하기',done: false},
-        {id:1,text:'JAVA공부',done: false}
-]); 
+
 const [todoText,setTodoText]= useState('');
-const [insertAt,setInsertAt] = useState(todos.length-1);
+const [todos,dispatch] = useReducer(todoReducer, [
+    {id:0,text:'개발공부하기',done: false},
+    {id:1,text:'JAVA공부',done: false}
+]);
+const [insertAt,setInsertAt] = useState(todos.length - 1);
+
+//1] Added
 const handleAddTodo = (e) =>{
-    const nextId = todos.length+1;
-    setTodos(
-        [
-        ...todos,
-        {
-            id: nextId,
-            text: todoText,
-            done: false
-        }
-    ]
-    )
+    dispatch({type: 'added', nextId: todos.length, todoText: todoText});
     setTodoText(''); //null or undefined [x]
   
 }
@@ -28,53 +23,36 @@ const handleAddTodo = (e) =>{
 const handleTodoText = (e) =>{
     setTodoText(e.target.value)
 }
+
+//3] delete
 const handleDeleteItem = (deleteId) => {
-    setTodos(todos.filter(item => item.id !== deleteId))
+    dispatch({type:'deleted', deleteId: deleteId})
 }
 const handleKeyPreeEnter = (e) =>{
     if(e.key === 'Enter'){ //또는 keyCode ==== 13
     handleAddTodo();
 }
 }
+
+//4] done
 const handleToggleTodo = (id, done) =>{
-
-    const newTods = todos.map((item) => {
-        if(item.id === id){
-         return {
-            ...item,
-            done
-         }
-        }else{
-            return item;
-        }
-    })
-
-    setTodos(newTods);
-    
+    dispatch({type: 'toggled', id: id, done: done});
 }
 
 const handleChangeSelect = (e) => {
     setInsertAt( e.target.value);
 }
+
+//2] added_index
 const handleAddSelect = (e) =>{
-    const nextId = todos.length+1;
-    
-   setTodos([
-    //사입지점 이전 항목
-    ...todos.slice(0,insertAt),
-    {id:nextId,text:todoText,done:false},
-    ...todos.slice(insertAt)
-]
-);
+dispatch({type : 'added-index', nextId: todos.length, todoText: todoText,insertAt: insertAt})
     setTodoText(''); //null or undefined [x]
   
 }
 
+//5] reverse
 const handleReverseList = () =>{
-    // const reverseTodos = [...todos];
-    // reverseTodos.reverse();
-    // setTodos(reverseTodos);
-    setTodos(todos => todos.toReversed())
+    dispatch({type: 'reversed'});
 }
     return (
         <div>
