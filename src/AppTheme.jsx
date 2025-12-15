@@ -2,19 +2,16 @@ import './AppTheme.css';
 import HeaderTheme from './components/theme/Header.jsx';
 import MainTheme from './components/theme/Main.jsx'
 import FooterTheme from './components/theme/Footer.jsx'
-import { DarkModeContext } from './context/DarkModeContext.jsx';
-import { useState } from 'react';
+import { DarkModeProvider } from './context/DarkModeContext.jsx';
+
 const AppTheme = () => {
-  const [darkMode, setDarkMode] = useState(true);
-  const handleToggleDarkMode = () =>{
-    setDarkMode(!darkMode)
-  } 
+
   return (
-    <DarkModeContext.Provider value={{darkMode, handleToggleDarkMode}}>
+    <DarkModeProvider initDarkMode={false}>
       <HeaderTheme />
       <MainTheme />
       <FooterTheme  />
-    </DarkModeContext.Provider>
+    </DarkModeProvider>
   );
 }
 
