@@ -28,8 +28,9 @@ const handleTodoText = (e) =>{
 const handleDeleteItem = (deleteId) => {
     dispatch({type:'deleted', deleteId: deleteId})
 }
-const handleKeyPreeEnter = (e) =>{
-    if(e.key === 'Enter'){ //또는 keyCode ==== 13
+const handleAddTodoEnter = (e) =>{
+    //한글 입력시 두번 입력 방지
+    if(e.key === 'Enter' && e.nativeEvent.isComposing === false){ //또는 keyCode ==== 13
     handleAddTodo();
 }
 }
@@ -58,7 +59,7 @@ const handleReverseList = () =>{
         <div>
             <h2>할일목록</h2>
             <div>
-            <input type="text" value={todoText} onChange={handleTodoText}  onKeyUp={handleKeyPreeEnter} />
+            <input type="text" value={todoText} onChange={handleTodoText}  onKeyUp={handleAddTodoEnter} />
             <button onClick={handleAddTodo}>추가</button>
             </div>
             <div>
