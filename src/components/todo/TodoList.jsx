@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import TodoItem from "./TodoItem"; 
 import { TodoContext } from "../../context/TodoContext";
 const TodoList = () => {
@@ -15,11 +15,17 @@ const TodoList = () => {
     const filteredTodos = getFilterdTodos();
 
     const getStatsCount = () => {
+        console.log('getStatsCount');
         const totalCount = todos.length;
         const doneCount = todos.filter(item => item.done).length;
         return {totalCount,doneCount};
     }
-    const {totalCount,doneCount} = getStatsCount()
+    
+
+    const {totalCount,doneCount} = useMemo(() => {
+        return getStatsCount();
+    }, [todos]);
+
     return (
         <>
         <div>
