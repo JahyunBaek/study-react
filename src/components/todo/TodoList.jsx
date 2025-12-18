@@ -15,7 +15,7 @@ const TodoList = () => {
     const filteredTodos = getFilterdTodos();
 
     const getStatsCount = () => {
-        console.log('getStatsCount');
+        //console.log('getStatsCount');
         const totalCount = todos.length;
         const doneCount = todos.filter(item => item.done).length;
         return {totalCount,doneCount};

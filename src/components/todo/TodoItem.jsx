@@ -1,6 +1,6 @@
 import { useDispatch } from "../../context/TodoContext"
-
-const TodoItem = ({item}) =>{
+import { memo } from "react";
+const TodoItem = memo(function TodoItem({item}){
 
     const dispatch = useDispatch()
 
@@ -24,7 +24,7 @@ const handleToggleTodo = (id, done) =>{
             </button>
         </label>
     )
-}
+});
 
 
 export default TodoItem;
